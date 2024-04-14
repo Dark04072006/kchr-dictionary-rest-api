@@ -1,0 +1,10 @@
+.mypy_cache
+.pytest_cache
+.venv
+.vscode
+.idea
+.ruff_cache
+*.egg-info
+__pycache__
+.env
+env.sh
