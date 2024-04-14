@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Generic, TypeVar
 
 ValueT = TypeVar("ValueT")
@@ -8,6 +9,7 @@ ValueT = TypeVar("ValueT")
 class ValueObject(Generic[ValueT]):
     __value: ValueT
 
+    @lru_cache(typed=True)
     def to_raw(self) -> ValueT:
         return self.__value
 
