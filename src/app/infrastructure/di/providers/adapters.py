@@ -8,7 +8,11 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
+from app.domain.dictionary.repositories import DictionaryItemRepository
 from app.infrastructure.config import DatabaseConfig
+from app.infrastructure.data_access.repositories.dictionary import (
+    SqlalchemyDictionaryItemRepository,
+)
 
 
 class SqlalchemyProvider(Provider):
@@ -34,3 +38,9 @@ class SqlalchemyProvider(Provider):
     ) -> AsyncIterable[AsyncSession]:
         async with sessionmaker() as session:
             yield session
+
+    dictionary_item_repository = provide(
+        SqlalchemyDictionaryItemRepository,
+        scope=Scope.REQUEST,
+        provides=DictionaryItemRepository,
+    )
