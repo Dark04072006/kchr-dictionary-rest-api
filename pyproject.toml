@@ -41,3 +41,7 @@ testpaths = [
 
 [tool.isort]
 profile = "black"
+
+[tool.mypy]
+exclude = "tests/"
+python_version = "3.11"
