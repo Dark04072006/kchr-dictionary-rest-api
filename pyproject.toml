@@ -38,3 +38,6 @@ pythonpath = [
 testpaths = [
   "tests",
 ]
+
+[tool.isort]
+profile = "black"
