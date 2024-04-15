@@ -1,15 +1,10 @@
 from dishka import Provider, Scope, provide
 
-from app.application.usecases.dictionary import (
-    GetItemsByLanguage,
-    GetListItems,
-    SearchItems,
-)
+from app.application.usecases.dictionary import GetItems, GetTranslations
 
 
 class UseCasesProvider(Provider):
     scope = Scope.REQUEST
 
-    get_list_items = provide(GetListItems)
-    search_items = provide(SearchItems)
-    get_items_by_language = provide(GetItemsByLanguage)
+    get_items = provide(GetItems)
+    get_translations = provide(GetTranslations)

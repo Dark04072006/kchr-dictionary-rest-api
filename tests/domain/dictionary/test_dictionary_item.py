@@ -26,6 +26,17 @@ def test_create_dictionary_item() -> None:
     assert item.translation_language == Language("RUSS")
 
 
+def test_same_dictionary_item_languages() -> None:
+    with pytest.raises(DomainValidationError):
+        DictionaryItem.create(
+            id=1,
+            original="Уи махуэ фlыуэ!",
+            translation="Уи махуэ фlыуэ!",
+            original_language="CS",
+            translation_language="CS",
+        )
+
+
 def test_invalid_dictionary_item_id() -> None:
     with pytest.raises(DomainValidationError):
         DictionaryItem.create(

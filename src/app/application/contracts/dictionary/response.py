@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 
 from app.domain.dictionary.entities import DictionaryItem
+from app.domain.dictionary.value_objects import LanguageT
 
 
 @dataclass(frozen=True)
@@ -8,8 +9,8 @@ class ItemResponse:
     id: int
     original: str
     translation: str
-    original_language: str
-    translation_language: str
+    original_language: LanguageT
+    translation_language: LanguageT
 
     @staticmethod
     def from_entity(entity: DictionaryItem) -> "ItemResponse":

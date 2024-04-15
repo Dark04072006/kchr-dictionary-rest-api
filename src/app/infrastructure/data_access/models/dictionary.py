@@ -1,6 +1,9 @@
+from typing import cast
+
 from sqlalchemy import Column, Integer, Text
 
 from app.domain.dictionary.entities import DictionaryItem
+from app.domain.dictionary.value_objects import LanguageT
 from app.infrastructure.data_access.models.base import Base
 
 
@@ -15,9 +18,9 @@ class DictionaryItemDb(Base):
 
     def to_entity(self) -> DictionaryItem:
         return DictionaryItem.create(
-            id=self.id,
-            original=self.original,
-            translation=self.translation,
-            original_language=self.original_language,
-            translation_language=self.translation_language,
+            id=cast(int, self.id),
+            original=cast(str, self.original),
+            translation=cast(str, self.translation),
+            original_language=cast(LanguageT, self.original_language),
+            translation_language=cast(LanguageT, self.translation_language),
         )

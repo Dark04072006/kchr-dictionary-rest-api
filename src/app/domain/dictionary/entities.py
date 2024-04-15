@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from app.domain.common.entities import Entity
+from app.domain.common.exceptions import DomainValidationError
 from app.domain.dictionary.value_objects import (
     DictionaryItemId,
     Language,
@@ -16,6 +17,12 @@ class DictionaryItem(Entity[DictionaryItemId]):
     translation: Translation
     original_language: Language
     translation_language: Language
+
+    def __post_init__(self) -> None:
+        if self.original_language == self.translation_language:
+            raise DomainValidationError(
+                "Original and translation languages cannot be the same"
+            )
 
     @staticmethod
     def create(

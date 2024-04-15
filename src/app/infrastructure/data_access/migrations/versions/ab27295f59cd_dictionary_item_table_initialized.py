@@ -1,15 +1,12 @@
 """dictionary item table initialized
 
 Revision ID: ab27295f59cd
-Revises: 
+Revises:
 Create Date: 2024-04-15 00:22:03.267941
 
 """
 
 from typing import Sequence, Union
-
-import sqlalchemy as sa
-from alembic import op
 
 # revision identifiers, used by Alembic.
 revision: str = "ab27295f59cd"

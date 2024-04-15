@@ -51,5 +51,6 @@ class Language(ValueObject[LanguageT]):
 
         if self.to_raw() not in ["KAR", "CS", "RUSS"]:
             raise DomainValidationError(
-                f'Item language field must be "KAR" or "CS" or "RUSS", not {self.to_raw()}'
+                'Item language field must be "KAR" or "CS" '
+                f' or "RUSS", not {self.to_raw()}'
             )
