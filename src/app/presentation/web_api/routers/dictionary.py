@@ -2,53 +2,69 @@ from typing import Annotated
 
 from dishka import FromDishka
 from dishka.integrations.fastapi import DishkaRoute
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from app.application.contracts.dictionary.request import (
-    GetItemsRequest,
-    GetTranlationsRequest,
+    GetItemsByLanguageRequest,
+    LimitOffsetRequest,
+    SearchItemsRequest,
 )
 from app.application.contracts.dictionary.response import ListItemsResponse
-from app.application.usecases.dictionary import GetItems, GetTranslations
-from app.presentation.web_api.schemas.items import GetItemsSchema
-from app.presentation.web_api.schemas.translations import GetTranslationsSchema
-
-dictionary_router = APIRouter(tags=["dictionary"], route_class=DishkaRoute)
-
-
-@dictionary_router.get(
-    "/items",
-    response_model=ListItemsResponse,
-    description="Retrieves a list of dictionary items.",
+from app.application.usecases.dictionary import (
+    GetItemsByLanguage,
+    GetListItems,
+    SearchItems,
 )
+
+dictionary_router = APIRouter(
+    prefix="/dictionary", tags=["dictionary"], route_class=DishkaRoute
+)
+
+
+@dictionary_router.get("/", response_model=ListItemsResponse)
 async def get_list_items(
-    schema: Annotated[GetItemsSchema, Depends()],
-    interactor: FromDishka[GetItems],
+    request: Annotated[LimitOffsetRequest, Depends()],
+    interactor: FromDishka[GetListItems],
 ) -> ListItemsResponse:
-    return await interactor(
-        GetItemsRequest(
-            limit=schema.limit,
-            offset=schema.offset,
-            language=schema.language,
+    if request.limit >= 100:
+        raise HTTPException(
+            status_code=400,
+            detail="Limit cannot be greater than 100",
         )
-    )
+
+    return await interactor(request)
 
 
-@dictionary_router.get(
-    "/translations",
-    response_model=ListItemsResponse,
-    description="Searches for translations of a given word/phrase.",
-)
-async def get_translations(
-    schema: Annotated[GetTranslationsSchema, Depends()],
-    interactor: FromDishka[GetTranslations],
+@dictionary_router.get("/search", response_model=ListItemsResponse)
+async def search_items(
+    request: Annotated[SearchItemsRequest, Depends()],
+    interactor: FromDishka[SearchItems],
 ) -> ListItemsResponse:
+    if request.limit >= 100:
+        raise HTTPException(
+            status_code=400,
+            detail="Limit cannot be greater than 100",
+        )
+
+    return await interactor(request)
+
+
+@dictionary_router.get("/{language}", response_model=ListItemsResponse)
+async def get_items_by_language(
+    language: str,
+    request: Annotated[LimitOffsetRequest, Depends()],
+    interactor: FromDishka[GetItemsByLanguage],
+) -> ListItemsResponse:
+    if request.limit >= 100:
+        raise HTTPException(
+            status_code=400,
+            detail="Limit cannot be greater than 100",
+        )
+
     return await interactor(
-        GetTranlationsRequest(
-            original=1,
-            original_language=schema.original_language,
-            translation_language=schema.translation_language,
-            limit=schema.limit,
-            offset=schema.offset,
+        GetItemsByLanguageRequest(
+            language=language,
+            limit=request.limit,
+            offset=request.offset,
         )
     )
