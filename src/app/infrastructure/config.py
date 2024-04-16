@@ -8,9 +8,9 @@ class DatabaseConfig:
 
     @staticmethod
     def from_env() -> "DatabaseConfig":
-        uri = getenv("DATABASE_URI")
-
-        if not uri:
-            raise RuntimeError("Missing DATABASE_URI environment variable")
+        uri = getenv(
+            "DATABASE_URI",
+            "sqlite+aiosqlite:///assets/dictionary.db",
+        )
 
         return DatabaseConfig(uri)
