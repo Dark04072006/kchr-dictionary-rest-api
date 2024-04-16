@@ -90,11 +90,7 @@ scripts/start.prod.sh
 
 ## Лицензия
 
-<<<<<<< HEAD
 Смотрите файл [LICENSE](https://github.com/Dark04072006/kchr-dictionary-rest-api/blob/main/LICENSE.md) для прав и ограничений лицензии (MIT).
-=======
-Смотрите файл [LICENSE](https://github.com/Dark04072006/kchr-dictionary-rest-api/blob/dev/LICENSE.md) для прав и ограничений лицензии (MIT).
->>>>>>> 430e770 (docs)
 
 ### Проблемы
 
