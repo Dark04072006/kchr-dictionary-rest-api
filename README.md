@@ -1,6 +1,6 @@
 # RESTful API of the Dictionary of the Peoples of the Karachay-Cherkess Republic.
 
-[Документация на русском](https://github.com/Dark04072006/kchr-dictionary-rest-api/docs/README.ru.md)
+[Документация на русском](https://github.com/Dark04072006/kchr-dictionary-rest-api/blob/main/docs/README.ru.md)
 
 ## Technical advantages of the project:
 
@@ -92,7 +92,7 @@ scripts/start.prod.sh
 
 ## License
 
-See the [LICENSE](https://github.com/Dark04072006/kchr-dictionary-rest-api/LICENSE.md) file for license rights and limitations (MIT).
+See the [LICENSE](https://github.com/Dark04072006/kchr-dictionary-rest-api/blob/main/LICENSE.md) file for license rights and limitations (MIT).
 
 ### Issues
 
