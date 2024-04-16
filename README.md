@@ -1,6 +1,6 @@
 # RESTful API of the Dictionary of the Peoples of the Karachay-Cherkess Republic.
 
-[Документация на русском](https://github.com/Dark04072006/kchr-dictionary-rest-api/docs/WREADME.ru.md)
+[Документация на русском](https://github.com/Dark04072006/kchr-dictionary-rest-api/docs/README.ru.md)
 
 ## Technical advantages of the project:
 
