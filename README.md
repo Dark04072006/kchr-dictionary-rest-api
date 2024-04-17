@@ -228,9 +228,7 @@ If you have any questions, suggestions, or feedback regarding this project, feel
 
 - **Author:** Alim Abrekov
 - **Email:** Abrekovalim38702@gmail.com
-- **GitHub:** [https://github.com/Dark04072006](https
-
-://github.com/Dark04072006)
+- **GitHub:** [https://github.com/Dark04072006](https://github.com/Dark04072006)
 - **Telegram:** [https://t.me/some_usernamexD](https://t.me/some_usernamexD)
 
 Stay connected!
