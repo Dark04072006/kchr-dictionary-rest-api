@@ -72,12 +72,17 @@ chmod +x scripts/start.sh
 scripts/start.sh
 ```
 
+#### 3. Отлично! Проект запущен по адресу http://localhost:8000
+
 ## Docker
 
 ### Запуск проекта с помощью Docker
+
 ``` shell
 docker-compose up -d
 ```
+
+### проект запущен по адресу http://localhost:8002
 
 ## Документация REST API
 
