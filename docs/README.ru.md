@@ -88,6 +88,118 @@ chmod +x scripts/start.prod.sh
 scripts/start.prod.sh
 ```
 
+## Документация REST API
+
+#### GET /items
+
+Получение списка элементов словаря.
+
+**Описание:** Этот эндпоинт позволяет получить список элементов словаря.
+
+**Параметры запроса:**
+
+- `limit` (optional): Количество элементов для отображения на одной странице. Максимальное значение: 100. По умолчанию: 20.
+- `offset` (optional): Смещение от начала списка элементов. Максимальное значение: 100. По умолчанию: 0.
+- `language` (optional): Язык, на котором необходимо получить элементы словаря. Возможные значения: "KAR", "CS", "RUSS". По умолчанию: null.
+
+**Пример запроса:**
+
+```http
+GET /items?limit=20&offset=0&language=KAR
+```
+
+**Пример ответа:**
+
+```json
+{
+  "data": [
+    {
+      "id": 21,
+      "original": "абитуриент",
+      "translation": "абитуриент || абитуриентский",
+      "original_language": "KAR",
+      "translation_language": "RUSS"
+    },
+    {
+      "id": 22,
+      "original": "аблескин",
+      "translation": "<em>текст. </em>аблескин <em>(род шёлковой ткани).</em>",
+      "original_language": "KAR",
+      "translation_language": "RUSS"
+    },
+    {
+      "id": 23,
+      "original": "аблёскюн",
+      "translation": "<em>то же, что </em><strong>аблескин</strong>",
+      "original_language": "KAR",
+      "translation_language": "RUSS"
+    }
+    // Другие элементы словаря...
+  ]
+}
+```
+
+#### GET /translations
+
+Поиск переводов для заданного слова/фразы.
+
+**Описание:** Этот эндпоинт позволяет искать переводы для заданного слова/фразы.
+
+**Параметры запроса:**
+
+- `limit` (optional): Количество элементов для отображения на одной странице. Максимальное значение: 100. По умолчанию: 20.
+- `offset` (optional): Смещение от начала списка элементов. Максимальное значение: 100. По умолчанию: 0.
+- `original` (required): Слово или фраза, для которой необходимо найти перевод.
+- `original_language` (required): Язык оригинала. Возможные значения: "KAR", "CS", "RUSS".
+- `translation_language` (required): Язык перевода. Возможные значения: "KAR", "CS", "RUSS".
+
+**Пример запроса:**
+
+```http
+GET /translations?limit=20&offset=0&original=привет&original_language=RUSS&translation_language=KAR
+```
+
+**Пример ответа:**
+
+```json
+{
+  "data": [
+    {
+      "id": 42411,
+      "original": "неприветливый",
+      "translation": "-ая, -ое <strong>1. </strong><i>(неласковый, суровый) </i>хыны, гырхы, дюрген; ~ <strong>человек </strong>хыны адам; <strong>2. </strong><i>(мрачный) </i>къууатсыз, илешсиз, мугур.",
+      "original_language": "RUSS",
+      "translation_language": "KAR"
+    }
+    // Другие переводы...
+  ]
+}
+```
+
+### /health-check/
+
+#### GET /health-check/
+
+Проверка состояния.
+
+**Описание:** Этот эндпоинт позволяет проверить состояние приложения.
+
+**Пример запроса:**
+
+```http
+GET /health-check/
+```
+
+**Пример ответа:**
+
+```json
+{
+  "status": "Ok"
+}
+```
+
+Вы также можете воспользоваться [openapi спецификацией](https://github.com/Dark04072006/kchr-dictionary-rest-api/blob/main/openapi/openapi.json)
+
 ## Лицензия
 
 Смотрите файл [LICENSE](https://github.com/Dark04072006/kchr-dictionary-rest-api/blob/main/LICENSE.md) для прав и ограничений лицензии (MIT).

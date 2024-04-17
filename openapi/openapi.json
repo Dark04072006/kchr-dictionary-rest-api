@@ -1,0 +1,287 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/items": {
+      "get": {
+        "tags": ["dictionary"],
+        "summary": "Get List Items",
+        "description": "Retrieves a list of dictionary items.",
+        "operationId": "get_list_items_items_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": ["KAR", "CS", "RUSS"],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Language"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListItemsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/translations": {
+      "get": {
+        "tags": ["dictionary"],
+        "summary": "Get Translations",
+        "description": "Searches for translations of a given word/phrase.",
+        "operationId": "get_translations_translations_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "original",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Original"
+            }
+          },
+          {
+            "name": "original_language",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "enum": ["KAR", "CS", "RUSS"],
+              "type": "string",
+              "title": "Original Language"
+            }
+          },
+          {
+            "name": "translation_language",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "enum": ["KAR", "CS", "RUSS"],
+              "type": "string",
+              "title": "Translation Language"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListItemsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health-check/": {
+      "get": {
+        "tags": ["health-check"],
+        "summary": "Health Check",
+        "operationId": "health_check_health_check__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthCheckResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "default": "Ok"
+          }
+        },
+        "type": "object",
+        "title": "HealthCheckResponse"
+      },
+      "ItemResponse": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "original": {
+            "type": "string",
+            "title": "Original"
+          },
+          "translation": {
+            "type": "string",
+            "title": "Translation"
+          },
+          "original_language": {
+            "type": "string",
+            "enum": ["KAR", "CS", "RUSS"],
+            "title": "Original Language"
+          },
+          "translation_language": {
+            "type": "string",
+            "enum": ["KAR", "CS", "RUSS"],
+            "title": "Translation Language"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "original",
+          "translation",
+          "original_language",
+          "translation_language"
+        ],
+        "title": "ItemResponse"
+      },
+      "ListItemsResponse": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ItemResponse"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "type": "object",
+        "title": "ListItemsResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
