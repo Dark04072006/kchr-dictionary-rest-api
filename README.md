@@ -62,32 +62,24 @@ export DATABASE_URI=YOUR_DATABASE_URI_FOR_DICTIONARY
 
 ### 7. Run the Web API
 
-#### Run in Development Mode
 
-1. Set permissions for the script
+#### 1. Set permissions for the script
 
 ```shell
-chmod +x scripts/start.dev.sh
+chmod +x scripts/start.sh
 ```
 
-2. Run the script
+#### 2. Run the script
 
 ```bash
-scripts/start.dev.sh
+scripts/start.sh
 ```
 
-#### Run in Production Mode
+## Docker
 
-1. Set permissions for the script
-
-```shell
-chmod +x scripts/start.prod.sh
-```
-
-2. Run the script
-
-```shell
-scripts/start.prod.sh
+### Run with docker
+``` shell
+docker-compose up -d
 ```
 
 ## REST API Documentation

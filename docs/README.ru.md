@@ -60,32 +60,23 @@ export DATABASE_URI=ВАША_URI_БАЗЫ_ДАННЫХ_СЛОВАРЯ
 
 ### 7. Запуск веб-API
 
-#### Запуск в режиме разработки
-
-1. Установите разрешения для скрипта
+#### 1. Установите разрешения для скрипта
 
 ```shell
-chmod +x scripts/start.dev.sh
+chmod +x scripts/start.sh
 ```
 
-2. Запустите скрипт
-
-```bash
-scripts/start.dev.sh
-```
-
-#### Запуск в режиме продакшн
-
-1. Установите разрешения для скрипта
+#### 2. Запустите скрипт
 
 ```shell
-chmod +x scripts/start.prod.sh
+scripts/start.sh
 ```
 
-2. Запустите скрипт
+## Docker
 
-```shell
-scripts/start.prod.sh
+### Запуск проекта с помощью Docker
+``` shell
+docker-compose up -d
 ```
 
 ## Документация REST API

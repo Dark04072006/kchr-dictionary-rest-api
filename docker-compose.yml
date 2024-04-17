@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  web_api:
+    build: .
+    command:
+      - "sh"
+      - "-c"
+      - "alembic -c conf/alembic.ini upgrade head && gunicorn -c conf/gunicorn.conf.py 'app.main.web_api:create_app()'"
+    
+    ports:
+      - "8002:8000"
+    
+    environment:
+      - DATABASE_URI=sqlite+aiosqlite:///assets/dictionary.db
