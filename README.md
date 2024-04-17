@@ -75,12 +75,15 @@ chmod +x scripts/start.sh
 scripts/start.sh
 ```
 
+#### 3. Great!! The project was launched at http://localhost:8000
+
 ## Docker
 
 ### Run with docker
 ``` shell
 docker-compose up -d
 ```
+### The project was launched at http://localhost:8002
 
 ## REST API Documentation
 
