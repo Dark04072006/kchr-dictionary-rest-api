@@ -10,6 +10,7 @@ dependencies = [
   "uvicorn>=0.29.0",
   "gunicorn>=21.2.0",
 ]
+name = "kchr-dictionary-rest-api"
 requires-python = ">=3.11.0"
 version = "0.0.1"
 
